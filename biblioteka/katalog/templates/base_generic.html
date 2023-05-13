@@ -28,6 +28,7 @@
             <li><a href="{% url 'autorzy' %}">Autorzy</a></li>
             <li><a href="{% url 'wydawcy' %}">Wydawcy</a></li>
             <li><a href="{% url 'bibliotekarze' %}">Bibliotekarze</a></li>
+            <li><a href="{% url 'zapytania' %}">Zapytania</a></li>
             {% if user.is_authenticated %}
             <li>User: {{ user.get_username }}</li>
             <li><a href="{% url 'moje-pozyczone' %}">Moje wypozyczenia</a></li>

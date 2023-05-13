@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %} 
+{% block content %}
+<h1>Zapytania</h1>
+
+{% if zapytania %}
+<ul>
+  {% for z in zapytania %}
+  <li>
+    {{ z.tytul }}
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>Zapytanie zostało niepoprawnie sformułowane</p>
+{% endif %} 
+{% endblock %}

@@ -52,12 +52,28 @@ class AutorListView(generic.ListView):
     context_object_name = 'autor_list'
     queryset = Autor.objects.all()
     template_name = 'autor_list.html'
-    paginate_by = 10
+    paginate_by = 5
 
 
 class AutorSzczegolView(generic.DetailView):
     model = Autor
     template_name = 'autor_detail.html'
+
+
+class AutorCreate(CreateView):
+    model = Autor
+    fields = ['imie', 'nazwisko', 'data_urodzenia', 'data_smierci']
+    initial = {'data_smierci': '12/30/2070'}
+
+
+class AutorUpdate(UpdateView):
+    model = Autor
+    fields = '__all__'
+
+
+class AutorDelete(DeleteView):
+    model = Autor
+    success_url = reverse_lazy('autorzy')
 
 
 class KsiazkaListView(generic.ListView):
@@ -148,17 +164,10 @@ def prolonguj_ksiazka_bibliotekarz(request, pk):
     return render(request, 'katalog/prolonguj_ksiazka_bibliotekarz.html', context)
 
 
-class AutorCreate(CreateView):
-    model = Autor
-    fields = ['imie', 'nazwisko', 'data_urodzenia', 'data_smierci']
-    initial = {'data_smierci': '12/30/2070'}
+class Zapytania(generic.ListView):
+    model = Ksiazka
+    template_name = 'Zapytania.html'
 
-
-class AutorUpdate(UpdateView):
-    model = Autor
-    fields = '__all__'
-
-
-class AutorDelete(DeleteView):
-    model = Autor
-    success_url = reverse_lazy('autorzy')
+    def get_queryset(self):
+        query = Ksiazka.objects.all()
+        return query
