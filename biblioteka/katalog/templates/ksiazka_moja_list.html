@@ -7,10 +7,16 @@
   {% for k in moja_ksiazka_list %}
   <li>
     <a href="{{ k.get_absolute_url }}"> {{ k.tytul }} </a> ({{ k.autor }})
+    <a href="{% url 'ksiazka-update' k.id %}">Aktualizuj</a>
+    <a href="{% url 'ksiazka-delete' k.id %}">Usun</a>
   </li>
   {% endfor %}
 </ul>
+<a href="{% url 'ksiazka-create' %}">Dodaj ksiazke</a>
+<br>
 {% else %}
-<p>Jeszcze nie mamy ksiazek</p>
+<p>Jeszcze nie mamy ksiazek, moze zechcesz jakas dodac?</p>
+<a href="{% url 'ksiazka-create' %}">Dodaj ksiazke</a>
+<br>
 {% endif %} 
 {% endblock %}

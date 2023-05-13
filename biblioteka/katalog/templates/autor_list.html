@@ -7,10 +7,16 @@
   {% for autor in autor_list %}
   <li>
     <a href="{{ autor.get_absolute_url }}"> {{ autor.nazwisko }} </a> ({{ autor.imie }})
+    <a href="{% url 'autor-update' autor.id %}">Aktualizuj</a>
+    <a href="{% url 'autor-delete' autor.id %}">Usun</a>
   </li>
   {% endfor %}
 </ul>
+<a href="{% url 'autor-create' %}">Dodaj autora</a>
+<br>
 {% else %}
-<p>Jeszcze nie mamy autorow</p>
+<p>Jeszcze nie mamy autorow. Jesli chcesz, dodaj swoich ulubionych tworcow</p>
+<a href="{% url 'autor-create' %}">Dodaj autora</a>
+<br>
 {% endif %} 
 {% endblock %}
