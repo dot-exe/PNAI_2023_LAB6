@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %} 
+{% block content %}
+<h1>Pozyczone ksiazki</h1>
+{% if instancjaksiazki_list %}
+<ul>
+    {% for ik in instancjaksiazki_list %}
+    <li class="{% if ik.przetrzymana %} text-danger {% endif %}">
+        <a href="{% url 'ksiazka-detail' ik.ksiazka.pk %}">
+            {{ ik.ksiazka.tytul }}
+        </a>
+        ({{ ik.data_zwrotu }})
+        <a href="{% url 'prolonguj-ksiazka-bibliotekarz' ik.id %}">Prolonguj</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>Jeszcze nic nie pozyczalismy</p>
+{% endif %} 
+{% endblock %}

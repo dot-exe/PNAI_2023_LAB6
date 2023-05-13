@@ -1,0 +1,15 @@
+{% extends "base_generic.html" %} 
+{% block content %}
+<h1>Prolonguj: {{ instancja.ksiazka.tytul }}</h1>
+<p>Wypozyczajacy: {{ instancja.wypozycza }}</p>
+<p {% if instancja.przetrzymana %} class="text-danger" {% endif %}>Data zwrotu: {{ instancja.data_zwrotu }}</p>
+
+<form action="" method="post">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="Ustaw">
+</form>
+
+{% endblock %}

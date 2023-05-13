@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %} 
+{% block content %}
+<h1>Lista Wydawcow</h1>
+
+{% if wydawca_list %}
+<ul>
+  {% for w in wydawca_list %}
+  <li>
+    <a href="{{ w.get_absolute_url }}"> {{ w.nazwa }} </a> ({{ w.miasto }})
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>Nie zarejestrowano wydawcow</p>
+{% endif %} 
+{% endblock %}

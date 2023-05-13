@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %} 
+{% block content %}
+<h1>Lista Bibliotekarzy</h1>
+
+{% if bibliotekarz_list %}
+<ul>
+  {% for b in bibliotekarz_list %}
+  <li>
+    <a href="{{ b.get_absolute_url }}"> {{ b.nazwisko }}, {{ b.imie }} </a>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>Pusto tu tak bez pracownikow :/</p>
+{% endif %} 
+{% endblock %}

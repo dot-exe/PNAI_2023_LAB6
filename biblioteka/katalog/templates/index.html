@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %} {% block content %}
+
+<h1>Strona domowa - Biblioteka</h1>
+<p>Witaj</p>
+
+<h2>Informacje</h2>
+
+<p>Zawartosc biblioteki</p>
+
+<ul>
+  <li><strong>Ksiazki:</strong> {{ num_ks }}</li>
+  <li><strong>Egzemplarze:</strong> {{ num_in }}</li>
+  <li><strong>Egzemplarze dostepne:</strong> {{ num_in_d }}</li>
+  <li><strong>Autorzy:</strong> {{ num_au }}</li>
+  <li><strong>Wydawcy:</strong> {{ num_wyd }}</li>
+  <li><strong>Bibliotekarze:</strong> {{ num_bib }}</li>
+</ul>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %} 
+{% block content %}
+<h1>Lista Ksiazek</h1>
+
+{% if moja_ksiazka_list %}
+<ul>
+  {% for k in moja_ksiazka_list %}
+  <li>
+    <a href="{{ k.get_absolute_url }}"> {{ k.tytul }} </a> ({{ k.autor }})
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>Jeszcze nie mamy ksiazek</p>
+{% endif %} 
+{% endblock %}

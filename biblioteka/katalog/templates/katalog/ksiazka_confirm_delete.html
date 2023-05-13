@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<h1>Usun Ksiazke</h1>
+
+<p>Czy chcesz skasowac ksiazke? {{ ksiazka }}</p>
+
+<form action="" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Potwierdz">
+</form>
+
+{% endblock %}

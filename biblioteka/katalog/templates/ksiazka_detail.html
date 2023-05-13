@@ -1,0 +1,42 @@
+{% extends "base_generic.html" %} 
+{% block content %}
+<h1>Tytul: {{ ksiazka.tytul }}</h1>
+<p><strong>Autor:</strong> {{ ksiazka.autor}}</p>
+<p><strong>Opis:</strong> {{ ksiazka.opis }}</p>
+<p><strong>ISBN:</strong> {{ ksiazka.isbn }}</p>
+<p>
+  <strong>Gatunek:</strong> 
+  {% for g in ksiazka.gatunek.all %}
+  {{g}} 
+  {% if not forloop.last %}
+  , 
+  {% endif %} 
+  {% endfor %}
+</p>
+<div style="margin-left: 20px; margin-top: 20px">
+  <h4>Egzemplarze</h4>
+  {% for inst in ksiazka.instancjaksiazki_set.all %}
+  <hr />
+  <p
+    class="{% if inst.status == 'd' %} text-success {% elif inst.status == 'n%' %} text-danger {% else %} text-warning {% endif %}"
+  >
+    {{ inst.get_status.display }}
+  </p>
+
+  {% if inst.status != 'd' and inst.status != 'n' %}
+  <p>
+    <strong>Data zwrotu:</strong>
+    {{ inst.data_zwrotu }}
+  </p>
+  {% endif %}
+  <p>
+    <strong>Wydawca:</strong>
+    {{ inst.wydawca }}
+  </p>
+  <p class="text-muted">
+    <strong>Id:</strong>
+    {{ inst.id }}
+  </p>
+  {% endfor %}
+</div>
+{% endblock %}
