@@ -165,9 +165,11 @@ def prolonguj_ksiazka_bibliotekarz(request, pk):
 
 
 class Zapytania(generic.ListView):
-    model = Ksiazka
+    # mozna podmienić w zaleznosci od kontekstu i dac jedna wartosc, ja dalem wszystko i query wykorzysta te, ktore potrzebuje
+    model = [Ksiazka, InstancjaKsiazki, Autor, Wydawca, Bibliotekarz]
+    # obligatorka, podajemy obiekt do ktorego zapisujemy
+    context_object_name = 'zapytania'
+    # templatka, w naszym przypadku Zapytania.html
     template_name = 'Zapytania.html'
-
-    def get_queryset(self):
-        query = Ksiazka.objects.all()
-        return query
+    # miejsce na twoje query, may the pepe be with you
+    queryset = Ksiazka.objects.all()
