@@ -55,7 +55,7 @@ After running your app, the main part will be available at `https:localhost:8000
 
 ## Tasks - Queries
 
-Example solution:
+Example solution:<br>
 ***for /biblioteka/katalog/views.py***
 ```
 # 2. zawiera tytuly ksiazek z litera o
@@ -84,7 +84,7 @@ queryset = Autor.objects.values('data_urodzenia', 'imie', 'nazwisko').annotate(
         najstarszy=Min('data_urodzenia'))[:1]
 ```
 
-***for /biblioteka/katalog/templates/Zapytania.html***
+***for /biblioteka/katalog/templates/Zapytania.html***<br>
 _How to display queries_
 ```
 <ul>
