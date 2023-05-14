@@ -5,6 +5,7 @@ from django.shortcuts import render
 from .models import Autor, Gatunek, Ksiazka, InstancjaKsiazki, Wydawca, Bibliotekarz
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Count, Max, Min
 
 # required imports for prolongata
 
@@ -166,10 +167,38 @@ def prolonguj_ksiazka_bibliotekarz(request, pk):
 
 class Zapytania(generic.ListView):
     # mozna podmienić w zaleznosci od kontekstu i dac jedna wartosc, ja dalem wszystko i query wykorzysta te, ktore potrzebuje
-    model = [Ksiazka, InstancjaKsiazki, Autor, Wydawca, Bibliotekarz]
+    model = [Ksiazka, InstancjaKsiazki, Autor, Wydawca, Bibliotekarz, Gatunek]
     # obligatorka, podajemy obiekt do ktorego zapisujemy
     context_object_name = 'zapytania'
     # templatka, w naszym przypadku Zapytania.html
     template_name = 'Zapytania.html'
+
     # miejsce na twoje query, may the pepe be with you
-    queryset = Ksiazka.objects.all()
+
+    # 2. zawiera tytuly ksiazek z litera o (chyba jak egzemplarze, to chodzi o instancje)
+    # queryset = InstancjaKsiazki.objects.filter(ksiazka__tytul__icontains='o')
+
+    # 3. autor jest ABC (ABC == dowolny)
+    # queryset = InstancjaKsiazki.objects.filter(ksiazka__autor__nazwisko='Lem')
+
+    # 4. autorzy, ktorych ksiazki zawieraja litere 'o' w nazwie
+    # queryset = Ksiazka.objects.filter(
+    #     tytul__icontains='o').values_list('autor__nazwisko', 'autor__imie').distinct()
+
+    # 5. gatunki ksiazek autora abc
+    # queryset = Ksiazka.objects.values_list(
+    #     'gatunek__nazwa', 'autor__nazwisko').filter(autor__nazwisko='Lem').distinct()
+
+    # 6. wszystkie egzemplarze ksiazek ktorych autorem jest ABC i gatunek to DEF
+    # queryset = InstancjaKsiazki.objects.filter(
+    #     ksiazka__autor__nazwisko='Lem', ksiazka__gatunek__nazwa='sci-fi')
+
+    # 7. wyswietlic liczbe ksiazek
+    # queryset = Ksiazka.objects.all().count()
+
+    # 8. wyswietlic autora i liczbe jego ksiazek w obiekcie QuerySet
+    # queryset = Autor.objects.annotate(num_books=Count("ksiazka"))
+
+    # 9. wyswietlic date urodzenia najstarszego autora'
+    # queryset = Autor.objects.values('data_urodzenia', 'imie', 'nazwisko').annotate(
+    #     najstarszy=Min('data_urodzenia'))[:1]
