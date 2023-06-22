@@ -110,4 +110,4 @@ _How to display queries_
   <!-- {% endfor %} -->
 </ul>
 ```
-
+<sub>NOTE: sometimes yout query will return an object, so for loop is unnecessary and may cause some issues - remove it when it occur</sub>
